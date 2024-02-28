@@ -1,0 +1,18 @@
+commands:
+  world:
+    - github.com/u-root/u-root/cmds/*/*
+
+  core:
+    - github.com/u-root/u-root/cmds/core/*
+
+  boot:
+    - github.com/u-root/u-root/cmds/boot/*boot*
+
+  cpu:
+    - github.com/u-root/u-root/cmds/core/*
+    - github.com/u-root/cpu/cmds/cpud
+
+configs:
+  default:
+    init: init
+    shell: gosh
