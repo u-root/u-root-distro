@@ -9,25 +9,22 @@ jobs:
   publish:
     strategy:
       matrix:
-        template: [core, all, embedded, minimal]
+        template: ["core", "boot core", "world", "cpu"]
         arch: [amd64, arm, arm64, riscv64]
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-      with:
-        repository: u-root/u-root
-
-    - name: Set up Go
+    - uses: actions/checkout@v4
+    - name: Setup Go
       uses: actions/setup-go@v4
       with:
         go-version: '1.21'
 
     - name: Build
       run: |
-        go build .
-        GOARCH=${{ matrix.arch }} ./u-root -uroot-source . \
+        go install github.com/u-root/mkuimage/cmd/mkuimage@latest
+        GOARCH=${{ matrix.arch }} mkuimage -config=default \
           -o ${{ matrix.arch }}-${{ matrix.template }}.cpio \
           ${{ matrix.template }}
         xz --check=crc32 -9 --lzma2=dict=1MiB \
