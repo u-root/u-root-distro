@@ -28,5 +28,7 @@ jobs:
       - name: Build
         run: |
           go install github.com/u-root/mkuimage/cmd/mkuimage@latest
+          go install github.com/hugelgupf/vmtest/tools/runvmtest@latest
           GOARCH=${{ matrix.arch }} mkuimage -config=default \
             ${{ matrix.template }}
+          runvmtest -- bash -c "cp \$VMTEST_KERNEL ./kernel-x86_64"
