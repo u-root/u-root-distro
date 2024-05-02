@@ -29,9 +29,9 @@ jobs:
           -o "${{ matrix.arch }}-${{ matrix.template }}.cpio" \
           ${{ matrix.template }}
         xz --check=crc32 -9 --lzma2=dict=1MiB \
-          --stdout ${{ matrix.arch }}-${{ matrix.template }}.cpio | \
+          --stdout "${{ matrix.arch }}-${{ matrix.template }}.cpio" | \
           dd conv=sync bs=512 \
-          of=${{ matrix.arch }}-${{ matrix.template }}.cpio.xz
+          of="${{ matrix.arch }}-${{ matrix.template }}.cpio.xz"
         runvmtest -- bash -c "cp \$VMTEST_KERNEL ./kernel-x86_64"
 
     - name: Upload
@@ -39,8 +39,8 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         tag: ${{ github.ref }}
-        file: ${{ matrix.arch }}-${{ matrix.template }}.cpio.xz
-        asset_name: u-root_${{ matrix.arch }}_${{ matrix.template }}.cpio.xz
+        file: "${{ matrix.arch }}-${{ matrix.template }}.cpio.xz"
+        asset_name: "u-root_${{ matrix.arch }}_${{ matrix.template }}.cpio.xz"
 
     - name: Upload_kernels
       uses: svenstaro/upload-release-action@v2
