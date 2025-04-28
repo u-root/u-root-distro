@@ -9,7 +9,7 @@ Download a prebuilt u-root image from
 [releases](https://github.com/linuxboot/u-root-builder/releases):
 
 ```sh
-curl -L -o u-root.cpio.xz https://github.com/linuxboot/u-root-builder/releases/download/v0.0.1/u-root_amd64_all.cpio.xz
+curl -L -o u-root.cpio.xz https://github.com/linuxboot/u-root-builder/releases/latest/download/u-root_amd64_all.cpio.xz
 ```
 
 Download a
